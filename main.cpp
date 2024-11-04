@@ -8,6 +8,13 @@
 #include <vector>
 using namespace std;
 
+void addVillager(map<string, tuple<int, string, string>>&);
+void deleteVillager(map<string, tuple<int, string, string>>&);
+void increaseFriendship(map<string, tuple<int, string, string>>&);
+void decreaseFriendship(map<string, tuple<int, string, string>>&);
+void searchVillager(map<string, tuple<int, string, string>>&);
+void displayVillagers(const map<string, tuple<int, string, string>>&);
+
 int main()
 {
     // declarations
@@ -59,6 +66,28 @@ int main()
             case 6:
                 cout << "Exiting program. Goodbye!\n";
                 return 0;
+            default:
+                cout << "\nInvalid choice. Please select a valid option\n";
         }
+
+        // Display the current villager details after each operation
+        displayVillagers(villagerData);
     }
+
+    return 0;
+}
+
+void addVillager(map<string, tuple<int, string, string>>& villagers)
+{
+    string name, species, catchphrase;
+    int friendship;
+
+    cout << "\n--- Add Villager ---\n";
+
+    cout << "Villager name: ";
+    getline(cin, name);
+
+    cout << "Friendship level: ";
+    cin >> friendship;
+    cin.ignore(1000, '\n');
 }
