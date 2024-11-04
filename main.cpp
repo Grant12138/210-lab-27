@@ -90,4 +90,44 @@ void addVillager(map<string, tuple<int, string, string>>& villagers)
     cout << "Friendship level: ";
     cin >> friendship;
     cin.ignore(1000, '\n');
+
+    cout << "Species: ";
+    getline(cin, species);
+
+    cout << "Catchphrase: ";
+    getline(cin, catchphrase);
+
+    tuple<int, string, string> aVillager {friendship, species, catchphrase};
+    villagers[name] = aVillager;
+    cout << "\n" << name << "added.\n\n";
+}
+
+void deleteVillager(map<string, tuple<int, string, string>>& villagers)
+{
+    string name;
+
+    cout << "\n--- Delete Villager ---\n";
+    cout << "Enter the name of the villager to be deleted: ";
+    getline(cin, name);
+
+    auto it = villagers.find(name);
+    if (it == villagers.end())
+        cout << "Error: Villager " << name << " not found\n";
+    else
+        villagers.erase(it);
+}
+
+void increaseFriendship(map<string, tuple<int, string, string>>& villagers)
+{
+    string name;
+
+    cout << "\n--- Increase Friendship ---\n";
+    cout << "Enter the name of the villager to increase friendship: ";
+    getline(cin, name);
+
+    auto it = villagers.find(name);
+    if (it == villages.end())
+        cout << "Error: Villager " << name << " not found\n";
+    else
+        get<0>(villagers[name])++;
 }
