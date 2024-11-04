@@ -131,3 +131,53 @@ void increaseFriendship(map<string, tuple<int, string, string>>& villagers)
     else
         get<0>(villagers[name])++;
 }
+
+void decreaseFriendship(map<string, tuple<int, string, string>>& villagers)
+{
+    string name;
+
+    cout << "\n--- Decrease Friendship ---\n";
+    cout << "Enter the name of the villager to decrease friendship: ";
+    getline(cin, name);
+
+    auto it = villagers.find(name);
+    if (it == villagers.end())
+        cout << "Error: Villager " << name << " not found\n";
+    else
+        get<0>(villagers[name])++;
+}
+
+void searchVillager(map<string, tuple<int, string, string>>& villagers)
+{
+    string name;
+
+    cout << "\n--- Search Villager ---\n";
+    cout << "Enter the name of the villager to be searched: ";
+    getline(cin, name);
+
+    auto it = villagers.find(name);
+    if (it == villagers.end())
+        cout << "Error: Villager " << name << " not found\n";
+    else
+    {
+        cout << "Name: " << name << "\n";
+        cout << "Friendship level: " << get<0>(villagers[name]) << "\n";
+        cout << "Species: " << get<1>(villagers[name]) << "\n";
+        cout << "Catchphrase: " << get<2>(villagers[name]) << "\n";
+    }
+}
+
+void displayVillagers(map<string, tuple<int, string, string>>& villagers)
+{
+    if (villagers.empty())
+    {
+        cout << "No villagers to display yet\n";
+        return;
+    }
+
+    cout << "\nVillager details:\n";
+    for (const auto& pair : villagers)
+    {
+        cout << pair.first << " [" << get<0>(pair.second) << ", " << get<1>(pair.second) << ", " << get<2>(pair.second) << "\n";
+    }
+}
