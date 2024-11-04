@@ -14,9 +14,12 @@ void increaseFriendship(map<string, tuple<int, string, string>>&);
 void decreaseFriendship(map<string, tuple<int, string, string>>&);
 void searchVillager(map<string, tuple<int, string, string>>&);
 void displayVillagers(const map<string, tuple<int, string, string>>&);
+void print_id(string const& lab_desc);
 
 int main()
 {
+    print_id("Lab 27: Villager Map");
+
     // declarations
     map<string, tuple<int, string, string>> villagerData;
 
@@ -29,6 +32,7 @@ int main()
     villagerData["Audie"] = villager1;
     villagerData["Raymond"] = villager2;
     villagerData["Marshal"] = villager3;
+    displayVillagers(villagerData);
 
     int choice;
 
@@ -71,12 +75,20 @@ int main()
         }
 
         // Display the current villager details after each operation
+        cout << "\n";
         displayVillagers(villagerData);
     }
 
     return 0;
 }
 
+/********************************************************************
+ * FUNCTION: Add a villager to the map container
+ *
+ * @param villagers
+ *
+ * return NONE;
+ */
 void addVillager(map<string, tuple<int, string, string>>& villagers)
 {
     string name, species, catchphrase;
@@ -99,9 +111,16 @@ void addVillager(map<string, tuple<int, string, string>>& villagers)
 
     tuple<int, string, string> aVillager {friendship, species, catchphrase};
     villagers[name] = aVillager;
-    cout << "\n" << name << "added.\n\n";
+    cout << name << " added.\n";
 }
 
+/******************************************************
+ * FUNCTION: delete a villager from the map container
+ *
+ * @param villagers
+ *
+ * return NONE;
+ */
 void deleteVillager(map<string, tuple<int, string, string>>& villagers)
 {
     string name;
@@ -117,6 +136,13 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagers)
         villagers.erase(it);
 }
 
+/**************************************************
+ * FUNCTION: increase the friendship level of a specified villager by 1
+ *
+ * @param villagers
+ *
+ * return NONE;
+ */
 void increaseFriendship(map<string, tuple<int, string, string>>& villagers)
 {
     string name;
@@ -126,12 +152,19 @@ void increaseFriendship(map<string, tuple<int, string, string>>& villagers)
     getline(cin, name);
 
     auto it = villagers.find(name);
-    if (it == villages.end())
+    if (it == villagers.end())
         cout << "Error: Villager " << name << " not found\n";
     else
         get<0>(villagers[name])++;
 }
 
+/******************************************************************
+ * FUNCTION: decrease the friendship level of a specified villager by 1
+ *
+ * @param villagers
+ *
+ * return NONE;
+ */
 void decreaseFriendship(map<string, tuple<int, string, string>>& villagers)
 {
     string name;
@@ -144,9 +177,16 @@ void decreaseFriendship(map<string, tuple<int, string, string>>& villagers)
     if (it == villagers.end())
         cout << "Error: Villager " << name << " not found\n";
     else
-        get<0>(villagers[name])++;
+        get<0>(villagers[name])--;
 }
 
+/*****************************************************************
+ * FUNCTION: search for a specified villager by their name and display their information
+ *
+ * @param villagers
+ *
+ * return NONE;
+ */
 void searchVillager(map<string, tuple<int, string, string>>& villagers)
 {
     string name;
@@ -167,7 +207,14 @@ void searchVillager(map<string, tuple<int, string, string>>& villagers)
     }
 }
 
-void displayVillagers(map<string, tuple<int, string, string>>& villagers)
+/************************************************
+ * FUNCTION: display the details of all the villagers
+ *
+ * @param villagers
+ *
+ * return NONE;
+ */
+void displayVillagers(const map<string, tuple<int, string, string>>& villagers)
 {
     if (villagers.empty())
     {
@@ -175,9 +222,17 @@ void displayVillagers(map<string, tuple<int, string, string>>& villagers)
         return;
     }
 
-    cout << "\nVillager details:\n";
+    cout << "Villager details:\n";
     for (const auto& pair : villagers)
-    {
-        cout << pair.first << " [" << get<0>(pair.second) << ", " << get<1>(pair.second) << ", " << get<2>(pair.second) << "\n";
-    }
+        cout << pair.first << " [" << get<0>(pair.second) << ", " << get<1>(pair.second) << ", " << get<2>(pair.second) << "]\n";
+    cout << "\n";
+}
+
+void print_id(string const& lab_desc)
+{
+    cout << "\nCOMSC210 | Grant Luo | " << lab_desc << "\n";
+    cout << "Editor: CLion\n";
+    cout << "Compiler: Apple clang version 16.0.0\n";
+    cout << "File: " << __FILE__ << "\n";
+    cout << "Compiled: " << __DATE__ << " at " << __TIME__ << "\n\n";
 }
